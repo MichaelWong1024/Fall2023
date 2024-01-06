@@ -1,0 +1,44 @@
+CS4400: Introduction to Database Systems
+Relational Schema for SQL Testing Database (Wednesday, March 23, 2022)
+This database is constructed as an extension to the Company Database as defined in the Elmasri & Navathe
+textbook used in class. The initial relations (and the initial dataset for the physical schema) have been designed so 
+that they are unchanged from the textbook. The added relations will give more opportunities to produce a wider
+variety of queries for testing purposes.
+--- initial relational schema ---
+employee = (ssn, fname, minit, lname, bdate, address, salary, sex, dept_number [fk2], supervisor_ssn [fk7])
+fk2: dept_number → department (number), fk7: supervisor_ssn → employee (ssn), non-null attributes: {dept_number}
+department = (number, name, manager_ssn [fk4], start_date)
+fk4: manager_ssn → employee (ssn), unique attributes: {name}
+project = (number, name, location, controlling_dept [fk3])
+fk3: controlling_dept → department (number), non-null attributes: {controlling_dept}, unique attributes: {name}
+dependent = (ssn [fk1], name, sex, birth_date, relationship)
+fk1: ssn → employee (ssn)
+works_on = (employee_ssn [fk5], project_number [fk6], hours)
+fk5: employee_ssn → employee (ssn), fk6: project_number → project (number)
+dept_locations = (dept_number [fk8], location_name)
+fk8: dept_number → department (number)
+--- added relational schema ---
+customer = (cid, company, location, assets, fsid [fk10])
+fk10: fsid → fund_source (fsid), non-null attributes: {fsid}
+budget = (number [fk9], code, balance, fsid [fk11])
+fk9: number → department (number), fk11: fsid → fund_source (fsid)
+fund_source = (fsid, remaining, usage_rate, pnumber [fk22])
+fk22: pnumber → project (number)
+remote_access = (ssn [fk12], ip_address, account)
+fk12: ssn → employee (ssn), unique attributes: {ip_address}
+time_frames = (ssn [fk13], start_hour, duration)
+fk13: ssn → remote_access (ssn)
+in_office = (ssn [fk14], building, room)
+fk14: ssn → employee (ssn)
+analysis = (number [fk15], title, frequency, quantity)
+fk15: number → project (number)
+operations = (number [fk16], title, team_size)
+fk16: number → project (number)
+operation_skills = (number [fk17], skill_name)
+fk17: number → operations (number)
+maintenance = (number [fk18])
+fk18: number → project (number)
+maintenance_types = (number [fk19] , remote_access, frequency, cost)
+fk19: number → maintenance (number), remote_access ∈ {'none', 'intranet', 'vpn', 'open'}
+interns_in = (ssn, name [fk20], number [fk21], rating)
+fk20: (ssn, name) → dependent (ssn, name), fk21: number → department (number)

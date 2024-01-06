@@ -1,0 +1,52 @@
+CS4400: Introduction to Database Systems
+Description of SQL Testing Database (Thursday, March 24, 2022)
+This database is constructed as an extension to the Company Database as defined in the Elmasri & Navathe
+textbook used in class. Chapter 3 of the text gives an extensive description of the initial database tables: employees, 
+departments, projects, and dependents. The description below covers the remaining tables.
+The employees at the company work in (and sometimes manage) various departments, and work on various projects. 
+In an effort to minimize costs, they are offering their employees the opportunity to work from home. Employees must 
+select one or the other: either work from home via remote_access, or work in_office.
+If they work remotely, then the database must be able to track the employees Internet Protocol (IP address) and the 
+user account that they use to logon to the system. The database must also be able to track the different periods that 
+they normally access the system to help detect unauthorized access attempts. The periods are stored using the hour
+that they logon (i.e., start working using a 24-hour clock based on GMT) and the duration of the session (in hours).
+table 1: remote_access
+table 2: time_frames
+If they work in the office, then the database must be able to track the building and room number of their work office.
+table 3: in_office
+The employees also work on various projects, and those projects have various combinations of different aspects. 
+Some projects require analysis of collected data; some projects require a continuous operational staff; and others 
+require maintenance of the hardware and software components.
+For projects that have an analysis component, the database must be able to track a title that describes the purpose of 
+the data being collected, along with the number of times that the data must be collected each month (i.e., monthly 
+frequency) and the amount of data (measured in gigabytes/GB) collected during each event.
+table 4: analysis
+For projects that have an operations component, the database must be able to track the title that describes the type 
+of operation or activity being conducted, along with the number of people needed to conduct the operation. The 
+database must also be able to track the different skills that the members of the operational team need to have to 
+conduct the operation successfully.
+table 5: operations
+table 6: operation_skills
+For projects that have a maintenance component, the database must be able to track the numerous types of updates, 
+fixes and repairs required (monthly) to ensure that the project operates successfully. Some types of maintenance can 
+be performed remotely, either using the 'open' web, or more securely via a virtual private network ('vpn'). Other types 
+of maintenance must be performed via the 'intranet' in the same physical building, or directly with hands-on contact at 
+the affected system (i.e., 'none' as in no remote access) – for example, replacing a failed server or routing component. 
+And the cost of each individual maintenance service is also given in U.S. Dollars.
+table 7: maintenance
+table 8: maintenance_types
+All of these projects require funding to succeed. Funding can come from two very different sources: customers and 
+budgets. Customers often provide the funds needed to pursue a project, and the database must be able to track the 
+customer's company, location and assets (i.e., total available funds). On the other hand, budgets are directed by 
+departments, and the database must be able to track which department directs each budget, along with the total 
+balance of funds for each budget.
+table 9: customer
+table 10: budget
+As the customers and budgets are used to fund projects some portions of the total funds are allocated for use, and 
+the database must be able to track the funds remaining of the allocation along with the amount of funds that are used 
+each month (i.e., the usage or "burn" rate).
+table 11: fund_source
+Finally, the dependents are occasionally offered the opportunity to gain valuable experience with some of the 
+departments. The database must be able to track the most recent instance of a dependent interning with a 
+department, along with a rating to assess their performance (e.g., from 1 to 10, with 1 representing a "substandard/poor" effort, and 10 representing a "superlative/top-level" effort).
+table 12: interns_in
